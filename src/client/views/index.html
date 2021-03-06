@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Travel App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+  <script src="https://kit.fontawesome.com/1aac26dbd0.js" crossorigin="anonymous"></script>
+  <link href="../styles/style.scss" />
+</head>
+
+<body>
+
+  <main class="main">
+
+    <!-- Section Planner -->
+  <div class="app">
+
+    <div>
+      <div>
+        <h1 class="trip-heading">Trip Scheduler</h1>
+        <!-- <h2>Please enter your departure & destination details</h2> -->
+      </div>
+      <div>
+        <form id="form">
+
+          <label for="city">City:</label>
+          <input id="city" type="text" name="city" placeholder="Where to (e.g. Paris, Tokyo, New York)" required>
+          <br><br>
+          <label for="start">Start:</label>
+          <input type="date" id="start" name="start" required>
+          <br><br>
+          <label for="end">End:</label>
+          <input type="date" id="end" name="end" required>
+          <br><br>
+          <button id="submit" type="submit">Start planning</button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  </main>
+
+  <footer>
+        <section id="detailsPane" class="section invisible">
+          <div class="container">
+            <h4 class="ui horizontal divider header">
+              <i class="train icon"></i>
+              Trip Details
+            </h4>
+          </div>
+        <nav class="fnav">
+            <ul>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/emiribegic" target="_blank"><i class="fab fa-github-square"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+            </ul>
+            <div class="copyright">© 2021</div>
+        </nav>
+        </section>
+  </footer>
+
+  <!-- Service Workers -->
+  <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('~service-worker.js')
+          .then(registration => {
+          });
+      });
+    }
+  </script>
+</body>
+
+</html>
