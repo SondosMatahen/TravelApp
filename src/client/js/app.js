@@ -8,11 +8,8 @@ const handleSubmit = async (event) => {
     let today = new Date()
     let tripStart = new Date(startDate)
     let tripEnd = new Date(endDate)
-    let diffInTime = tripStart.getTime() - today.getTime()
-    // rounded up to the nearest integer 
-    let diffInDays = Math.round(diffInTime / (1000 * 3600 * 24))
-    // put dates in object to be accessible from everywhere
-    let dates = { startDate, endDate, diffInDays }
+    // put dates in object 
+    let dates = { startDate, endDate }
 
     // check if the user sumbit city values
     if (city === "") {
@@ -58,8 +55,6 @@ const handleSubmit = async (event) => {
         console.log('error', error);
     }
 
-    console.log('Fetching weatherbit:', { LatAndLon });
-
     // get the response lat and lon
     const resWeather = await fetch('http://localhost:8000/weather', {
         method: 'POST',
@@ -77,8 +72,6 @@ const handleSubmit = async (event) => {
     } catch (error) {
         console.log('error', error);
     }
-
-    console.log('Fetching  pixabay:', { LatAndLon });
 
     // get the response image
     const resPic = await fetch('http://localhost:8000/pic', {
