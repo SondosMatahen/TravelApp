@@ -75,7 +75,6 @@ console.log(`Your API key for pixabay is ${piKey}`)
 
 // to receive the POST sent from the client
 app.post('/pic', async function (req, res) {
-
     //fetch the url with keyword
     try {
         const fetchPic1 = await fetch(`${pixabayBaseURL}key=${piKey}&q=${city}&image_type=photo&orientation=horizontal&per_page=3&pretty=true`)
@@ -93,30 +92,6 @@ app.post('/pic', async function (req, res) {
     } catch (error) {
         console.log(error)
     }
-    // try {
-    //     const pic = await fetchPic1.json()
-
-    //     //check if the image  exist 
-    //     if (pic.totalHits > 0) {
-    //         res.send(pic)
-    //         console.log('Image found')
-    //     } else {
-    //         console.log(`No image found for the keyword: ${req.body.country}`)
-    //         try {
-    //             //looking for image related to countryName
-    //             const fetchPic2 = await fetch(`${pixabayBaseURL}key=${piKey}&q=${country}&image_type=photo&orientation=horizontal&per_page=3&pretty=true`)
-    //             const pic2 = await fetchPic2.json()
-    //             res.send(pic2)
-    //             console.log('Image found')
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    // } catch (error) {
-    //     console.log(error)
-    // }
-    // console.log(pic)
-
 })
 
 
