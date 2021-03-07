@@ -8,8 +8,8 @@ const handleSubmit = async (event) => {
     let startDate = document.getElementById('start').value
     let endDate = document.getElementById('end').value
     let today = new Date()
-    let tripStart = new Date(startDate)
-    let tripEnd = new Date(endDate)
+    let start = new Date(startDate)
+    let end = new Date(endDate)
     // put dates in object 
     let dates = { startDate, endDate }
 
@@ -20,7 +20,7 @@ const handleSubmit = async (event) => {
     }
 
     // check if a user enter a valid date
-    if (tripStart < today || tripEnd < tripStart) {
+    if (start < today || end < start) {
         alert('Invalid date: either you select past date as start date or set end date earlier than start date.')
         return
     }
@@ -31,9 +31,6 @@ const handleSubmit = async (event) => {
     let LatAndLon = {}
     let receivedWeather = {}
     let receivedPic = {}
-
-    console.log('Fetching geonames:', { city: city });
-
 
     const geo = await axios.post('http://localhost:8000/city', {city: city })
     .then(data => {
