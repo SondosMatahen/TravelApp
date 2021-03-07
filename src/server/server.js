@@ -33,9 +33,10 @@ let city, lat, lon, country;
 // geonames ->route
 const geoURL = 'http://api.geonames.org/searchJSON?q'
 const user = process.env.USERNAME
-console.log(`Your username for geonames is ${user}`);
+console.log(`Your username for geonames is ${process.env.USERNAME}`);
 
 app.post('/city', async function (req, res) {
+    console.log('req from city',req.body.city);
     city = req.body.city;
     // fetch data from API's endpoint
     const fetchGeo = await axios.get(`${geoURL}=${city}&maxRows=1&username=${user}`)

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const handleSubmit = async (event) => {
 
     event.preventDefault();
@@ -32,63 +34,26 @@ const handleSubmit = async (event) => {
 
     console.log('Fetching geonames:', { city: city });
 
-    // get the response geo
-    const resGeo = await fetch('http://localhost:8000/city', {
-        method: 'POST',
-        credentials: 'same-origin',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ city: city })
-    });
-    try {
-        const receivedGeo = await resGeo.json(); // receive res from the server side and transform into json
-        LatAndLon = {
-            city: receivedGeo.geonames[0].name,
-            country: receivedGeo.geonames[0].countryName,
-            lat: receivedGeo.geonames[0].lat,
-            lon: receivedGeo.geonames[0].lng
-        }
-        console.log('Data received from geonames:', LatAndLon)
-    } catch (error) {
-        console.log('error', error);
-    }
 
-    // get the response lat and lon
-    const resWeather = await fetch('http://localhost:8000/weather', {
-        method: 'POST',
-        credentials: 'same-origin',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(LatAndLon)
-    });
-    try {
-        receivedWeather = await resWeather.json();
-        console.log('Data received from weatherbit:', receivedWeather)
+    const geo = await axios.post('http://localhost:8000/city', {city: city })
+    .then(data => {
+        console.log('dataaaaaa', LatAndLon);
+        LatAndLon=data.data.geonames[0]
+        console.log('LatAndLon', LatAndLon);
+    })
 
-    } catch (error) {
-        console.log('error', error);
-    }
+    const weather = await axios.post('http://localhost:8000/weather')
+    .then(data => {
+        console.log('weather', data.data);
+        receivedWeather=data.data;
+    })
 
-    // get the response image
-    const resPic = await fetch('http://localhost:8000/pic', {
-        method: 'POST',
-        credentials: 'same-origin',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(LatAndLon)
-    });
-    try {
-        receivedPic = await resPic.json();
-        console.log('Data received from pixabay:', receivedPic)
-    } catch (error) {
-        console.log('error', error);
-    }
+    const pic = await axios.post('http://localhost:8000/pic')
+    .then(data => {
+        console.log('pic', data.data);
+        receivedPic=data.data;
+    })
+
 
     const main = document.querySelector('main')
     const div = document.createElement('div')
